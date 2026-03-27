@@ -3,6 +3,129 @@
    ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
+  /* ---------- HERO PARTICLE NETWORK ---------- */
+  const canvas = document.getElementById("heroCanvas");
+  const ctx = canvas.getContext("2d");
+  let particles = [];
+  let mouse = { x: null, y: null, radius: 150 };
+  let animId;
+
+  function resizeCanvas() {
+    const hero = canvas.parentElement;
+    canvas.width = hero.offsetWidth;
+    canvas.height = hero.offsetHeight;
+  }
+
+  resizeCanvas();
+  window.addEventListener("resize", resizeCanvas);
+
+  canvas.parentElement.addEventListener("mousemove", (e) => {
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+  });
+
+  canvas.parentElement.addEventListener("mouseleave", () => {
+    mouse.x = null;
+    mouse.y = null;
+  });
+
+  class Particle {
+    constructor() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.size = Math.random() * 2 + 0.5;
+      this.baseSpeedX = (Math.random() - 0.5) * 0.4;
+      this.baseSpeedY = (Math.random() - 0.5) * 0.4;
+      this.speedX = this.baseSpeedX;
+      this.speedY = this.baseSpeedY;
+      this.opacity = Math.random() * 0.5 + 0.15;
+    }
+
+    update() {
+      // Mouse repulsion
+      if (mouse.x !== null && mouse.y !== null) {
+        const dx = this.x - mouse.x;
+        const dy = this.y - mouse.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < mouse.radius) {
+          const force = (mouse.radius - dist) / mouse.radius;
+          this.speedX += (dx / dist) * force * 0.8;
+          this.speedY += (dy / dist) * force * 0.8;
+        }
+      }
+
+      // Dampen back to base speed
+      this.speedX += (this.baseSpeedX - this.speedX) * 0.05;
+      this.speedY += (this.baseSpeedY - this.speedY) * 0.05;
+
+      this.x += this.speedX;
+      this.y += this.speedY;
+
+      // Wrap around edges
+      if (this.x < 0) this.x = canvas.width;
+      if (this.x > canvas.width) this.x = 0;
+      if (this.y < 0) this.y = canvas.height;
+      if (this.y > canvas.height) this.y = 0;
+    }
+
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(0, 166, 251, ${this.opacity})`;
+      ctx.fill();
+    }
+  }
+
+  function initParticles() {
+    particles = [];
+    const area = canvas.width * canvas.height;
+    const count = Math.min(Math.floor(area / 8000), 120);
+    for (let i = 0; i < count; i++) {
+      particles.push(new Particle());
+    }
+  }
+
+  function connectParticles() {
+    const maxDist = 140;
+    for (let a = 0; a < particles.length; a++) {
+      for (let b = a + 1; b < particles.length; b++) {
+        const dx = particles[a].x - particles[b].x;
+        const dy = particles[a].y - particles[b].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < maxDist) {
+          const opacity = (1 - dist / maxDist) * 0.15;
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(0, 166, 251, ${opacity})`;
+          ctx.lineWidth = 0.6;
+          ctx.moveTo(particles[a].x, particles[a].y);
+          ctx.lineTo(particles[b].x, particles[b].y);
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach((p) => {
+      p.update();
+      p.draw();
+    });
+    connectParticles();
+    animId = requestAnimationFrame(animateParticles);
+  }
+
+  initParticles();
+  animateParticles();
+
+  // Re-init particles on resize
+  window.addEventListener("resize", () => {
+    cancelAnimationFrame(animId);
+    initParticles();
+    animateParticles();
+  });
+
   /* ---------- NAVBAR SCROLL ---------- */
   const navbar = document.getElementById("navbar");
 

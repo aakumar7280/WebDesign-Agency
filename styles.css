@@ -291,6 +291,92 @@ h3 {
   padding: 8rem 0 4rem;
   overflow: hidden;
   background: linear-gradient(160deg, var(--blue-500) 0%, var(--blue-400) 50%, var(--blue-300) 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 12s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Canvas particle network */
+#heroCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Subtle grid overlay */
+.hero-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 166, 251, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 166, 251, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 1;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 100%);
+}
+
+/* Floating gradient orbs */
+.hero-gradient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 1;
+  will-change: transform;
+}
+
+.orb-1 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(0, 166, 251, 0.25), transparent 70%);
+  top: -15%;
+  right: -5%;
+  animation: orbFloat1 8s ease-in-out infinite;
+}
+
+.orb-2 {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(5, 130, 202, 0.2), transparent 70%);
+  bottom: -5%;
+  left: -5%;
+  animation: orbFloat2 10s ease-in-out infinite;
+}
+
+.orb-3 {
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(0, 166, 251, 0.15), transparent 70%);
+  top: 50%;
+  left: 45%;
+  animation: orbFloat3 12s ease-in-out infinite;
+}
+
+@keyframes orbFloat1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(-40px, 30px) scale(1.08); }
+  66%      { transform: translate(20px, -20px) scale(0.95); }
+}
+
+@keyframes orbFloat2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(30px, -40px) scale(1.1); }
+  66%      { transform: translate(-20px, 20px) scale(0.92); }
+}
+
+@keyframes orbFloat3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(-30px, -30px) scale(1.15); }
 }
 
 .hero-bg-shapes {
@@ -304,7 +390,13 @@ h3 {
   position: absolute;
   border-radius: 50%;
   filter: blur(80px);
-  opacity: 0.15;
+  opacity: 0.12;
+  animation: shapePulse 6s ease-in-out infinite alternate;
+}
+
+@keyframes shapePulse {
+  0%   { opacity: 0.08; transform: scale(1); }
+  100% { opacity: 0.18; transform: scale(1.1); }
 }
 
 .shape-1 {
@@ -313,6 +405,7 @@ h3 {
   background: var(--blue-100);
   top: -10%;
   right: -5%;
+  animation-delay: 0s;
 }
 
 .shape-2 {
@@ -321,6 +414,7 @@ h3 {
   background: var(--blue-200);
   bottom: 10%;
   left: -8%;
+  animation-delay: 2s;
 }
 
 .shape-3 {
@@ -329,11 +423,12 @@ h3 {
   background: var(--blue-100);
   top: 40%;
   left: 50%;
+  animation-delay: 4s;
 }
 
 .hero-content {
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
 
 .hero-tag {
