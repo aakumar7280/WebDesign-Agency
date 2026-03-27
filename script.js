@@ -109,6 +109,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 4000);
   });
 
+  /* ---------- PROJECT BROWSER TILT EFFECT ---------- */
+  const tiltEls = document.querySelectorAll("[data-tilt]");
+
+  tiltEls.forEach((el) => {
+    const maxTilt = 6; // degrees
+
+    el.addEventListener("mousemove", (e) => {
+      const rect = el.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 to 0.5
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      const rotateX = -y * maxTilt;
+      const rotateY = x * maxTilt;
+      el.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+    });
+
+    el.addEventListener("mouseleave", () => {
+      el.style.transform = "perspective(800px) rotateX(0) rotateY(0) scale(1)";
+    });
+  });
+
   /* ---------- ACTIVE NAV HIGHLIGHT ---------- */
   const sections = document.querySelectorAll("section[id]");
 

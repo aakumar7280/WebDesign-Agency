@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Webitee — Web Design Agency</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -133,65 +134,84 @@
       <div class="section-header" data-animate>
         <p class="section-tag">Our Work</p>
         <h2>Projects we're <span class="highlight">proud of</span>.</h2>
+        <p class="section-desc">Each project is a live, fully-functional website — hover over the previews to explore them in action.</p>
       </div>
-      <div class="projects-grid" data-animate>
-        <!-- Project 1 -->
-        <article class="project-card">
-          <div class="project-image">
-            <div class="project-placeholder">
-              <span>Permit Genie</span>
-            </div>
-            <div class="project-overlay">
-              <a href="https://permitgenie.vercel.app/" target="_blank" rel="noopener" class="btn btn-small">View Live Site</a>
-            </div>
-          </div>
-          <div class="project-info">
-            <div class="project-tags">
-              <span>Web App</span>
-              <span>Development</span>
-            </div>
-            <h3>Permit Genie</h3>
-            <p>A smart permit assistance platform that simplifies the process of navigating permits and approvals for users.</p>
-          </div>
-        </article>
 
-        <!-- Project 2 -->
-        <article class="project-card">
-          <div class="project-image">
-            <div class="project-placeholder">
-              <span>Content Portfolio</span>
-            </div>
-            <div class="project-overlay">
-              <a href="https://aakumar7280.github.io/Aarush-Content-Portfolio/" target="_blank" rel="noopener" class="btn btn-small">View Live Site</a>
-            </div>
+      <!-- Project 1 — Featured -->
+      <article class="showcase-card showcase-featured" data-animate>
+        <div class="showcase-browser" data-tilt>
+          <div class="browser-bar">
+            <span class="browser-dot"></span>
+            <span class="browser-dot"></span>
+            <span class="browser-dot"></span>
+            <span class="browser-url">permitgenie.vercel.app</span>
           </div>
-          <div class="project-info">
-            <div class="project-tags">
+          <div class="browser-viewport">
+            <iframe src="https://permitgenie.vercel.app/" loading="lazy" title="Permit Genie Preview"></iframe>
+          </div>
+          <div class="showcase-glow"></div>
+        </div>
+        <div class="showcase-details">
+          <span class="showcase-number">01</span>
+          <div class="showcase-tags">
+            <span>Web App</span>
+            <span>Development</span>
+          </div>
+          <h3>Permit Genie</h3>
+          <p>A smart permit assistance platform that simplifies the process of navigating permits and approvals. Built with a focus on clean UI and effortless user flows.</p>
+          <a href="https://permitgenie.vercel.app/" target="_blank" rel="noopener" class="btn btn-primary">Visit Live Site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
+        </div>
+      </article>
+
+      <!-- Projects 2 & 3 — Side by side -->
+      <div class="showcase-duo" data-animate>
+        <article class="showcase-card">
+          <div class="showcase-browser" data-tilt>
+            <div class="browser-bar">
+              <span class="browser-dot"></span>
+              <span class="browser-dot"></span>
+              <span class="browser-dot"></span>
+              <span class="browser-url">aarush-content-portfolio</span>
+            </div>
+            <div class="browser-viewport">
+              <iframe src="https://aakumar7280.github.io/Aarush-Content-Portfolio/" loading="lazy" title="Content Portfolio Preview"></iframe>
+            </div>
+            <div class="showcase-glow"></div>
+          </div>
+          <div class="showcase-details">
+            <span class="showcase-number">02</span>
+            <div class="showcase-tags">
               <span>Portfolio</span>
               <span>Web Design</span>
             </div>
             <h3>Content Creator Portfolio</h3>
-            <p>A sleek personal portfolio website designed to showcase creative content work with a clean, engaging layout.</p>
+            <p>A sleek personal portfolio showcasing creative content work with a clean, engaging layout.</p>
+            <a href="https://aakumar7280.github.io/Aarush-Content-Portfolio/" target="_blank" rel="noopener" class="btn btn-primary">Visit Live Site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
           </div>
         </article>
 
-        <!-- Project 3 -->
-        <article class="project-card">
-          <div class="project-image">
-            <div class="project-placeholder">
-              <span>Landscaping Co.</span>
+        <article class="showcase-card">
+          <div class="showcase-browser" data-tilt>
+            <div class="browser-bar">
+              <span class="browser-dot"></span>
+              <span class="browser-dot"></span>
+              <span class="browser-dot"></span>
+              <span class="browser-url">landscaping-demo</span>
             </div>
-            <div class="project-overlay">
-              <a href="https://aakumar7280.github.io/Landscaping-Demo-Website/" target="_blank" rel="noopener" class="btn btn-small">View Live Site</a>
+            <div class="browser-viewport">
+              <iframe src="https://aakumar7280.github.io/Landscaping-Demo-Website/" loading="lazy" title="Landscaping Website Preview"></iframe>
             </div>
+            <div class="showcase-glow"></div>
           </div>
-          <div class="project-info">
-            <div class="project-tags">
+          <div class="showcase-details">
+            <span class="showcase-number">03</span>
+            <div class="showcase-tags">
               <span>Business Site</span>
               <span>Web Design</span>
             </div>
             <h3>Landscaping Demo Website</h3>
-            <p>A professional business website for a landscaping company, featuring service showcases and a clean, nature-inspired design.</p>
+            <p>A professional business website featuring service showcases and a clean, nature-inspired design.</p>
+            <a href="https://aakumar7280.github.io/Landscaping-Demo-Website/" target="_blank" rel="noopener" class="btn btn-primary">Visit Live Site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
           </div>
         </article>
       </div>

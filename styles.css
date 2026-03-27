@@ -532,82 +532,163 @@ h3 {
 
 /* ---------- WORK / PORTFOLIO ---------- */
 .work {
-  padding: 7rem 0;
+  padding: 7rem 0 5rem;
   background: var(--blue-500);
+  overflow: hidden;
 }
 
-.projects-grid {
+.section-desc {
+  color: var(--gray-300);
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+/* Showcase Card — shared */
+.showcase-card {
+  position: relative;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 2rem;
+  transition: var(--transition);
+  margin-bottom: 2.5rem;
+}
+
+.showcase-card:hover {
+  border-color: rgba(0, 166, 251, 0.18);
+  box-shadow: 0 0 60px rgba(0, 166, 251, 0.08);
+}
+
+/* Featured card — project 1 */
+.showcase-featured {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1.4fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  padding: 2.5rem;
+}
+
+/* Duo cards — projects 2 & 3 */
+.showcase-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 2rem;
 }
 
-.project-card {
-  border-radius: var(--radius);
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  transition: var(--transition);
+.showcase-duo .showcase-card {
+  margin-bottom: 0;
 }
 
-.project-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-lg);
-  border-color: rgba(0, 166, 251, 0.15);
-}
-
-.project-image {
+/* Browser mockup */
+.showcase-browser {
   position: relative;
-  aspect-ratio: 4 / 3;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--blue-400);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+  transition: transform 0.4s cubic-bezier(0.03, 0.98, 0.52, 0.99),
+    box-shadow 0.4s ease;
+  will-change: transform;
+}
+
+.showcase-browser:hover {
+  box-shadow: 0 20px 60px rgba(0, 166, 251, 0.15),
+    0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.browser-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.browser-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.browser-dot:first-child { background: #ff5f57; }
+.browser-dot:nth-child(2) { background: #ffbd2e; }
+.browser-dot:nth-child(3) { background: #28c840; }
+
+.browser-url {
+  margin-left: 10px;
+  font-size: 0.72rem;
+  color: var(--gray-300);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 3px 12px;
+  border-radius: 6px;
+}
+
+.browser-viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
   overflow: hidden;
 }
 
-.project-placeholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, var(--blue-400), var(--blue-300));
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.15);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  transition: var(--transition);
-}
-
-.project-card:hover .project-placeholder {
-  transform: scale(1.05);
-}
-
-.project-overlay {
+.browser-viewport iframe {
   position: absolute;
-  inset: 0;
-  background: rgba(5, 25, 35, 0.7);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: var(--transition);
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  border: none;
+  transform: scale(0.5);
+  transform-origin: top left;
+  pointer-events: none;
+  transition: pointer-events 0.3s;
 }
 
-.project-card:hover .project-overlay {
+.showcase-browser:hover .browser-viewport iframe {
+  pointer-events: auto;
+}
+
+/* Glow underneath browser */
+.showcase-glow {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 60px;
+  background: radial-gradient(ellipse, rgba(0, 166, 251, 0.2) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.showcase-browser:hover .showcase-glow {
   opacity: 1;
 }
 
-.project-info {
-  padding: 1.5rem;
+/* Details */
+.showcase-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
 }
 
-.project-tags {
+.showcase-number {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: rgba(0, 166, 251, 0.1);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.showcase-tags {
   display: flex;
   gap: 0.5rem;
-  margin-bottom: 0.75rem;
 }
 
-.project-tags span {
+.showcase-tags span {
   font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -618,15 +699,36 @@ h3 {
   border-radius: 50px;
 }
 
-.project-info h3 {
+.showcase-details h3 {
   color: var(--white);
-  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  margin-top: 0.15rem;
 }
 
-.project-info p {
-  font-size: 0.9rem;
+.showcase-featured .showcase-details h3 {
+  font-size: 1.8rem;
+}
+
+.showcase-details p {
   color: var(--gray-300);
-  line-height: 1.65;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.showcase-details .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  width: fit-content;
+}
+
+.showcase-details .btn svg {
+  transition: transform 0.3s ease;
+}
+
+.showcase-details .btn:hover svg {
+  transform: translate(3px, -3px);
 }
 
 /* ---------- CONTACT ---------- */
@@ -820,14 +922,13 @@ footer p {
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 1024px) {
-  .projects-grid {
-    grid-template-columns: 1fr 1fr;
+  .showcase-featured {
+    grid-template-columns: 1fr;
+    gap: 2rem;
   }
 
-  .projects-grid .project-card:last-child {
-    grid-column: 1 / -1;
-    max-width: 480px;
-    justify-self: center;
+  .showcase-duo {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -874,12 +975,21 @@ footer p {
     grid-template-columns: 1fr;
   }
 
-  .projects-grid {
+  .showcase-featured {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+  }
+
+  .showcase-duo {
     grid-template-columns: 1fr;
   }
 
-  .projects-grid .project-card:last-child {
-    max-width: none;
+  .showcase-card {
+    padding: 1.25rem;
+  }
+
+  .showcase-number {
+    font-size: 2.5rem;
   }
 
   .contact-wrapper {
